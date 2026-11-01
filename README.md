@@ -3,6 +3,9 @@
 Personal Tinkery Herdr Desktop configuration, licensed under Apache-2.0.
 Publishing or updating this repository does not deploy it to a live app.
 
+For agent-driven edits, dependency updates, deployment, or recovery, read
+[AGENTS.md](AGENTS.md) for safety boundaries and known gaps.
+
 ## Source and runtime stay separate
 
 This checkout is the source of truth for the personal `tinkery-t3`

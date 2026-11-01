@@ -4,6 +4,7 @@
   "license": "Apache-2.0",
   "files": [
     ".gitignore",
+    "AGENTS.md",
     "LICENSE",
     "LICENSES/herdr-t3-Apache-2.0.txt",
     "Makefile",
