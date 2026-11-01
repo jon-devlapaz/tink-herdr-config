@@ -1,0 +1,11 @@
+{
+  "zoom": 0.9,
+  "sounds": {
+    "enabled": true
+  },
+  "font": "Paper Mono",
+  "ui_font": "Paper Mono",
+  "minimum_contrast": 1,
+  "appearance": "light",
+  "theme": "tinkery-light"
+}

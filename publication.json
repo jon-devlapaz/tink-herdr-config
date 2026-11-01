@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "status": "approved for public GitHub publication",
+  "license": "Apache-2.0",
+  "files": [
+    ".gitignore",
+    "LICENSE",
+    "LICENSES/herdr-t3-Apache-2.0.txt",
+    "Makefile",
+    "NOTICE",
+    "README.md",
+    "config/keys.json",
+    "config/layouts/tinkery-t3.json",
+    "config/layouts/tinkery-t3.svg",
+    "config/mods/tinkery-theme/look.js",
+    "config/mods/tinkery-theme/main.js",
+    "config/mods/tinkery-theme/mod.json",
+    "config/mods/tinkery-theme/moon.svg",
+    "config/mods/tinkery-theme/sun.svg",
+    "config/settings.defaults.json",
+    "config/themes/tinkery-dark.json",
+    "config/themes/tinkery-light.json",
+    "publication.json",
+    "scripts/audit.py",
+    "scripts/config.py",
+    "tests/integration.py",
+    "tests/test_audit.py",
+    "tests/test_config.py",
+    "tests/theme.cjs",
+    "upstream.lock.json"
+  ],
+  "dependency": {
+    "source": "https://github.com/JinJieBeWater/herdr-t3",
+    "commit": "a4a2a6fcbd40f15fa3b62718dde4c78ac05fe3c3",
+    "distribution": "hash-locked external checkout; upstream mod code is not vendored"
+  },
+  "deliberate_disclosures": [
+    "Personal layout and mod names",
+    "Theme color palettes",
+    "Portable macOS keyboard bindings",
+    "Font name Paper Mono, zoom 0.9, sounds enabled, minimum contrast 1, light-mode defaults",
+    "Upstream repository and revision; tested Herdr Desktop version",
+    "Git commit author handle and GitHub no-reply email"
+  ],
+  "excluded": [
+    "Credentials and authenticated endpoints",
+    "Sessions, terminal text and screenshots",
+    "Machine identities, SSH details and workspace paths",
+    "Runtime state, telemetry and backups",
+    "Generated Herdr files and shipped application code",
+    "Pi configuration or installed Pi code",
+    "Inactive custom layouts and mods",
+    "Font binaries"
+  ],
+  "remaining_decisions": [
+    "Separate approval before deployment to live Herdr"
+  ]
+}

@@ -1,0 +1,22 @@
+tink-herdr-config
+Copyright 2026 jon-devlapaz
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+config/layouts/tinkery-t3.json is a modified derivative of Herdr T3 by
+JinJieBeWater: https://github.com/JinJieBeWater/herdr-t3
+Pinned original revision: a4a2a6fcbd40f15fa3b62718dde4c78ac05fe3c3
+Changes: personal layout identity, separate preview reference, and a top-right
+sun/moon theme-button block. Upstream T3 mods are not modified or vendored.
+The cloned_from version is the Herdr application version, not the T3 revision.
+
+config/layouts/tinkery-t3.svg is an unchanged copy of the upstream layout
+preview illustration. It is schematic, not a screenshot of a real session,
+and does not depict the added button or Tinkery palette.
+
+Herdr T3 and its upstream-derived material are Apache-2.0 licensed.
+See LICENSES/herdr-t3-Apache-2.0.txt. Its README credits Herdr App's shipped
+workspace-chrome, spaces, agents, tabs, pane, new-menu and main layout;
+Settle follows T3 Code's design.
+
+Original Tinkery material and modifications are also licensed under Apache-2.0.
+Upstream attribution and license terms remain in force.
