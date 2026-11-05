@@ -36,8 +36,10 @@
 
 ## Verification and publication
 
-- Run `make verify UPSTREAM_DIR=/path/to/pinned-checkout`; it includes unit tests,
-  the publication audit, and isolated deployment/native mod checks. No separate
+- Run `make verify UPSTREAM_DIR=/path/to/pinned-checkout TINKERY_DIR=/path/to/tinkery
+  TINKERY_BIN=/path/to/tinkery-executable`; it includes unit tests, the publication
+  audit, isolated deployment/native mod checks, and Tinkery's zero-budget terminal
+  test on TEST data. No separate
   static typechecker or formatter is configured. Report unavailable checks.
 - Run `herdr-app check` on deployed or temporary mod copies, not `config/mods/`:
   the checker can write `gpui-kit.d.ts` and `jsconfig.json` beside the source.

@@ -55,6 +55,8 @@ The workbench/decision-queue idea is not implemented.
 Tested with Herdr Desktop 0.1.11. Desktop supplies `gpui-kit`, the `herdr` API,
 shipped mods/icons, and generated type files. They are not vendored here.
 Herdr and Node.js must already be installed; scripts install no system packages.
+`make verify` also needs Tinkery: a checkout (for its terminal test helpers)
+and the installed `tinkery` executable.
 
 `upstream.lock.json` pins Herdr T3 to an exact Git commit and SHA-256 for every
 installed upstream file. `t3-pane`, `t3-agents` and `t3-inbox` are copied as
@@ -125,7 +127,8 @@ There is no technical lock against a future human overwriting personal files.
 ```sh
 make test
 make audit
-make verify UPSTREAM_DIR=/path/to/herdr-t3
+make verify UPSTREAM_DIR=/path/to/herdr-t3 \
+  TINKERY_DIR=/path/to/tinkery TINKERY_BIN=/path/to/tinkery-executable
 ```
 
 The integration verifier uses a temporary home and reads only shipped files
@@ -133,7 +136,11 @@ from an existing installation (`HERDR_FIXTURE_HOME` selects it). It never opens
 a new window or writes live configuration. It tests offline deployment,
 idempotence, every T3 and Tinkery mod, upstream regression tests, the theme
 button, the pane header, the Tinkery companion, and both personal sidebar menus.
-No external models, credentials, npm dependencies, static typechecker or formatter
+`tests/tinkery_terminal.py` then drives the real `tinkery` program in a
+terminal at 100x30 and 80x24 with a temporary home and zero model budget:
+practice Think, empty Shape, resizing to 64x24 and back. Fake provider programs
+fail the test if called. It reads no live Herdr state; on failure it keeps its
+temporary folder and prints its path. No external models, credentials, npm dependencies, static typechecker or formatter
 are required. Herdr's native mod checker validates the installed JavaScript API.
 
 `publication.json` is the exact candidate public-file allowlist. The audit fails

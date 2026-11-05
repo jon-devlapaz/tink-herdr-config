@@ -146,6 +146,22 @@ function takeLaunch(checkout, on = null) {
   assert.equal(nativeCalls.length, 0, "never move another tab's terminal implicitly");
   all.pop(); placed = null; delayKeep = false;
 
+  // Reopening a visible split keeps its size; after Hide (park) it reuses the same process.
+  const running = { address: "t-reopen", state: "live", pid: 12345, labels: { "t3-tinkery.owner": "herdr", "t3-tinkery.agent": "t1", "t3-tinkery.checkout": cwd } };
+  all.push(running);
+  placed = { pane: "p-reopen", terminal: running.address, tab: "b1", size: { weight: 0.57 } };
+  const visible = setup(); visible.openDefault(cx); await flush();
+  assert.equal(calls.length, 0, "reopening must not launch another Tinkery");
+  assert.equal(placed.size.weight, 0.57, "reopening must not reset the split");
+  assert.deepEqual(nativeCalls.splice(0), [["agent.focus", { terminal: "t1" }], ["pane.focus", { pane: "p1" }]]);
+  closed.splice(0);
+  placed = null;
+  const reopened = setup(); reopened.openDefault(cx); await flush();
+  assert.equal(calls.length, 0, "a hidden Tinkery is reused, not relaunched");
+  assert.equal(running.state, "live"); assert.equal(running.pid, 12345);
+  assert.deepEqual(nativeCalls.splice(0).at(-1), ["terminal.keep", { terminal: "t-reopen", place: "right" }]);
+  closed.splice(0); placed = null; all.pop();
+
   const changed = setup(); changed.chooseCheckout(cx); changed.chooseCheckout(cx); await flush();
   assert.equal(pickerCalls, 1); assert.equal(calls.length, 0, "changing checkout is not launch permission");
   assert.equal(changed.checkoutFor(changed.target()), picked);
@@ -215,5 +231,5 @@ function takeLaunch(checkout, on = null) {
   const ended = setup(); beforeRun = () => { all[0].state = "finished"; };
   await ended.launch("/remote checkout", ended.target(), cx);
   assert(ended.error.includes("changed") || ended.error.includes("unavailable")); assert.equal(calls.length, 0);
-  console.log("ok: reported-folder defaults, explicit overrides, no discovery/init, missing folders, local-label reuse, remote routing, native saved model/budget settings, stale targets, native target-safe splits, asynchronous adoption and no overlay/duplicate placement.");
+  console.log("ok: visible reopen keeps the split, hidden reopen reuses the process, reported-folder defaults, explicit overrides, no discovery/init, missing folders, local-label reuse, remote routing, native saved model/budget settings, stale targets, native target-safe splits, asynchronous adoption and no overlay/duplicate placement.");
 })().catch((error) => { console.error(error); process.exitCode = 1; });

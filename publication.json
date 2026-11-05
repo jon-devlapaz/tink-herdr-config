@@ -20,12 +20,12 @@
     "config/mods/tinkery-agent-menu/main.js",
     "config/mods/tinkery-agent-menu/mod.json",
     "config/mods/tinkery-agent-menu/tree.js",
+    "config/mods/tinkery-companion/main.js",
+    "config/mods/tinkery-companion/mod.json",
     "config/mods/tinkery-inbox/main.js",
     "config/mods/tinkery-inbox/mod.json",
     "config/mods/tinkery-inbox/name.js",
     "config/mods/tinkery-inbox/tree.js",
-    "config/mods/tinkery-companion/main.js",
-    "config/mods/tinkery-companion/mod.json",
     "config/mods/tinkery-pane/main.js",
     "config/mods/tinkery-pane/mod.json",
     "config/mods/tinkery-pane/name.js",
@@ -48,6 +48,7 @@
     "tests/test_audit.py",
     "tests/test_config.py",
     "tests/theme.cjs",
+    "tests/tinkery_terminal.py",
     "upstream.lock.json"
   ],
   "dependency": {
