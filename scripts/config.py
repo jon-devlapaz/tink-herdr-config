@@ -15,6 +15,15 @@ LOCAL_FILES = (
     'mods/tinkery-theme/main.js', 'mods/tinkery-theme/look.js',
     'mods/tinkery-theme/mod.json', 'mods/tinkery-theme/sun.svg',
     'mods/tinkery-theme/moon.svg',
+    'mods/tinkery-pane/main.js', 'mods/tinkery-pane/name.js',
+    'mods/tinkery-pane/tree.js', 'mods/tinkery-pane/mod.json',
+    'mods/tinkery-companion/main.js', 'mods/tinkery-companion/mod.json',
+    'mods/tinkery-agent-list/main.js', 'mods/tinkery-agent-list/mod.json',
+    'mods/tinkery-agent-list/name.js', 'mods/tinkery-agent-list/tree.js',
+    'mods/tinkery-inbox/main.js', 'mods/tinkery-inbox/mod.json',
+    'mods/tinkery-inbox/name.js', 'mods/tinkery-inbox/tree.js',
+    'mods/tinkery-agent-menu/main.js', 'mods/tinkery-agent-menu/mod.json',
+    'mods/tinkery-agent-menu/tree.js',
 )
 RECEIPT = '.tink-herdr-config/receipt.json'
 

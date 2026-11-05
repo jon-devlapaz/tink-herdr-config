@@ -9,7 +9,8 @@ For agent-driven edits, dependency updates, deployment, or recovery, read
 ## Source and runtime stay separate
 
 This checkout is the source of truth for the personal `tinkery-t3`
-layout, theme-button mod, Tinkery light/dark themes, and declared keybindings.
+layout, theme-button, pane-header and Tinkery companion mods, Tinkery
+light/dark themes, and declared keybindings.
 The live Herdr home is a deployment target, never a symlink to this checkout.
 This follows tink-pi-config's source/runtime separation and explicit verification;
 it does not configure Pi or introduce an agent-orchestration layer.
@@ -19,10 +20,28 @@ provider bridge, updater job, or background synchronizer is added here.
 
 ## Included behavior
 
-- T3's Spaces/Agents and Focus/Settle views, with `cmd-shift-b` to switch.
-- `cmd-shift-a` selects the cross-tab agent view, not current-pane zoom.
-  Use `cmd-shift-enter` for current-pane zoom.
+- Personal forks of T3's Lists and Inbox sidebars, with `cmd-shift-b` to switch and
+  `cmd-shift-s` to settle the agent in view. `cmd-shift-enter` zooms a pane.
+  Right-click an agent card for **Open Tinkery…**, **Rename tab…**, eligible
+  **Settle / Bring back**, and **Stop agent…**. Opening the menu does not select
+  the agent. Stopping requires confirmation, lists affected children, spares kept
+  child panes, and refuses if the process changed while the dialog was open.
+- Click **Shortcuts** beside the sun/moon button (or press `cmd-/`) to see
+  all configured shortcuts. Type to filter the list and press Esc to close it.
+- In `tinkery-t3`, `cmd-shift-r` opens the Changes panel for the focused pane's
+  repository. With an agent focused, `cmd-shift-t` opens its Tinkery setup
+  dialog. On Herdr builds with `window.open_or_focus`, pressing it again
+  brings that agent’s open dialog forward with your checkout edits intact.
+  Stock Herdr 0.1.11 opens a fresh dialog each time. Starting Tinkery takes a
+  separate click.
 - A top-right sun/moon button switches the Tinkery themes. No theme hotkey.
+- `tinkery-pane` (a fork of T3's `t3-pane`): right-click a pane header for
+  the native pane menu; hover an agent's header for **Open Tinkery…**.
+- `tinkery-companion` starts Tinkery for that agent in the agent's reported
+  folder (or an explicit checkout) and places it beside the agent with a
+  native, draggable split. It never discovers repositories or initializes Git,
+  and uses Tinkery's saved model and call allowance. A Tinkery pane's header
+  offers **Change checkout…**; its close button hides it and keeps it running.
 - The upstream `herdr-t3` layout stays untouched and remains available.
 - Portable macOS keybindings; machine preferences are missing-key defaults only.
 
@@ -38,7 +57,9 @@ shipped mods/icons, and generated type files. They are not vendored here.
 Herdr and Node.js must already be installed; scripts install no system packages.
 
 `upstream.lock.json` pins Herdr T3 to an exact Git commit and SHA-256 for every
-installed upstream file. No T3 mod code is copied into this source repository.
+installed upstream file. `t3-pane`, `t3-agents` and `t3-inbox` are copied as
+`tinkery-pane`, `tinkery-agent-list` and `tinkery-inbox`; the menu also copies
+T3's status-tree helper. Merge upstream changes into these copies by hand when updating the lock.
 Updates require a reviewed lock change and compatibility tests. New upstream
 layout features do not automatically merge into the personal layout.
 
@@ -46,7 +67,7 @@ To prepare the dependency separately (network access is explicit):
 
 ```sh
 git clone https://github.com/JinJieBeWater/herdr-t3.git /path/to/herdr-t3
-git -C /path/to/herdr-t3 checkout --detach a4a2a6fcbd40f15fa3b62718dde4c78ac05fe3c3
+git -C /path/to/herdr-t3 checkout --detach 287f0f3653daae33f39f24daaee3d6b556094610
 ```
 
 ## Plan first; deploy only when approved
@@ -110,7 +131,8 @@ make verify UPSTREAM_DIR=/path/to/herdr-t3
 The integration verifier uses a temporary home and reads only shipped files
 from an existing installation (`HERDR_FIXTURE_HOME` selects it). It never opens
 a new window or writes live configuration. It tests offline deployment,
-idempotence, all eight mods, upstream regression tests and the theme button.
+idempotence, every T3 and Tinkery mod, upstream regression tests, the theme
+button, the pane header, the Tinkery companion, and both personal sidebar menus.
 No external models, credentials, npm dependencies, static typechecker or formatter
 are required. Herdr's native mod checker validates the installed JavaScript API.
 

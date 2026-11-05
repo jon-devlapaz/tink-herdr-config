@@ -50,8 +50,19 @@ function fixture(background = '#141418') {
 }
 const plain = x => JSON.parse(JSON.stringify(x));
 (async () => {
+  {
+    const f = fixture();
+    const button = f.mod.render().children.find(child => child.attrs.accessibility_label === 'Shortcuts');
+    assert.ok(button?.children.includes('Shortcuts'), 'shortcut help has a visible label');
+    let stopped = false;
+    button.handlers.down({}, { stop_propagation() { stopped = true; } });
+    assert.ok(stopped, 'shortcut button does not drag window');
+    button.handlers.click({}, f.cx);
+    assert.deepEqual(f.calls.map(([command]) => command), ['app.help']);
+    assert.equal(f.writes, 0, 'opening shortcuts does not switch theme');
+  }
   for (const [bg, target, icon] of [['#141418', 'light', 'sun'], ['#ffffff', 'dark', 'moon']]) {
-    const f = fixture(bg), button = f.mod.render().children[0];
+    const f = fixture(bg), button = f.mod.render().children.find(child => child.attrs.accessibility_label === `Switch to ${target} mode`);
     assert.equal(button.children[0].source, `mods/tinkery-theme/${icon}.svg`);
     assert.equal(button.attrs.accessibility_label, `Switch to ${target} mode`);
     let stopped = false;
@@ -104,11 +115,13 @@ const plain = x => JSON.parse(JSON.stringify(x));
   assert.equal(top.children[0].content.mod, 't3-tabs');
   assert.equal(top.children.at(-1).content.mod, 'tinkery-theme');
   const keys = JSON.parse(fs.readFileSync(path.join(home, 'keys.json')));
-  for (const name of ['herdr-t3', 'tinkery-t3']) {
-    assert.deepEqual(keys[`layout:${name}`], {
-      'cmd-shift-b': 't3-chrome.sidebar',
-      'cmd-shift-a': 't3-tabs.view',
-    });
-  }
-  console.log('ok: sun/moon rendering, click behavior, both themes, settings preservation, repeat-click guard, errors, layout and no T3 theme shortcut');
+  const t3 = { 'cmd-shift-b': 't3-chrome.sidebar', 'cmd-shift-s': 't3-inbox.settle' };
+  assert.deepEqual(keys['layout:herdr-t3'], t3);
+  assert.deepEqual(keys['layout:tinkery-t3'], {
+    ...t3,
+    'cmd-shift-s': 'tinkery-inbox.settle',
+    'cmd-shift-t': 'tinkery-pane.open-tinkery',
+    'cmd-shift-r': 'mod.open:changes',
+  });
+  console.log('ok: theme button, shortcuts button, settings preservation, repeat-click guard, errors and layout-specific keys');
 })().catch(e => { console.error(e); process.exitCode = 1; });

@@ -35,7 +35,12 @@ export default class ThemeToggle extends View {
     const t = theme();
     const target = nextLook(t.background).appearance;
     const label = this.switching ? "Switching theme…" : `Switch to ${target} mode`;
-    return div().size_full().flex().items_center().justify_center().bg(t.chrome)
+    return div().size_full().flex().items_center().justify_center().gap(4).bg(t.chrome)
+      .child(div().id("tinkery-shortcuts").h(26).px(6).rounded(6).flex().items_center()
+        .text_size(12).text_color(t.muted).cursor_pointer().hover(el => el.bg(t.hover).text_color(t.foreground))
+        .role("button").accessibility_label("Shortcuts").tooltip("Show keyboard shortcuts")
+        .on_mouse_down("left", (_event, cx) => cx.stop_propagation())
+        .on_click(() => run("app.help")).child("Shortcuts"))
       .child(div().id("tinkery-theme-toggle").size(26).rounded(6).flex()
         .items_center().justify_center().text_color(t.muted)
         .cursor_pointer().hover(el => el.bg(t.hover).text_color(t.foreground))

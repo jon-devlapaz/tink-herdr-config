@@ -66,10 +66,8 @@
   force, automatic rollback, or automatic removal of retired files/bindings.
 - **Tooling burden:** the custom deployment script is maintained code, not an
   upstream Herdr feature. Prefer small, tested changes over extra infrastructure.
-- **Legacy shortcut:** the previously deployed global `cmd-shift-t` binding to
-  `tinkery-status.toggle` may survive because unrelated keys are preserved. It
-  supports an old layout and targets an unloaded panel in T3. It is not shipped
-  here; removing it requires explicit scope, not an unrelated cleanup pass.
+- Preserve the old layout's global `cmd-shift-t` binding unless the operator
+  asks to remove it. Keep the personal override in `layout:tinkery-t3`.
 - **Local receipt:** deployment records file hashes and owned bindings, not the
   source Git revision. Keep revision/provenance in deployment evidence; the
   receipt is drift detection, not a complete release history.

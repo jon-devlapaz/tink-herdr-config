@@ -4,9 +4,20 @@ Licensed under the Apache License, Version 2.0. See LICENSE.
 
 config/layouts/tinkery-t3.json is a modified derivative of Herdr T3 by
 JinJieBeWater: https://github.com/JinJieBeWater/herdr-t3
-Pinned original revision: a4a2a6fcbd40f15fa3b62718dde4c78ac05fe3c3
-Changes: personal layout identity, separate preview reference, and a top-right
-sun/moon theme-button block. Upstream T3 mods are not modified or vendored.
+Pinned original revision: 287f0f3653daae33f39f24daaee3d6b556094610
+Changes: personal layout identity, separate preview reference, a top-right
+sun/moon theme-button block, tighter pane framing, and the tinkery-pane header.
+
+config/mods/tinkery-pane/ is a modified copy of Herdr T3's t3-pane at the
+pinned revision (main.js, name.js, tree.js). Changes: a right-click pane menu,
+button tooltips, Open Tinkery / Change checkout actions, and hiding (parking)
+Tinkery panes instead of closing them. tests/pane.cjs extends T3's check-pane.cjs.
+
+config/mods/tinkery-agent-list/ and config/mods/tinkery-inbox/ are modified
+copies of T3's t3-agents and t3-inbox at the pinned revision (main.js,
+name.js, tree.js). Changes: targeted right-click agent menus and personal
+mod routing. config/mods/tinkery-agent-menu/tree.js is T3's unchanged
+status-tree helper. Other upstream T3 mods are not modified or vendored.
 The cloned_from version is the Herdr application version, not the T3 revision.
 
 config/layouts/tinkery-t3.svg is an unchanged copy of the upstream layout

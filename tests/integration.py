@@ -35,18 +35,26 @@ def main():
         assert not (target / 'layouts/tinkery-t3.json').exists(), 'Plan must not deploy'
         run(cli + ['apply'] + flags, env)
         run(cli + ['check'] + flags, env)
-        for mod in sorted((target / 'mods').glob('t3-*')) + [target / 'mods/tinkery-theme']:
+        mods = sorted((target / 'mods').glob('t3-*')) + sorted((target / 'mods').glob('tinkery-*'))
+        for mod in mods:
             run(['herdr-app', 'check', mod], env)
-        run(['node', target / 'mods/t3-spaces/check-sidebar.cjs'], env)
-        run(['node', target / 'mods/t3-pane/check-pane.cjs'], env)
+        for check in sorted((target / 'mods').glob('t3-*/check-*.cjs')):
+            run(['node', check], env)
         run(['node', ROOT / 'tests/theme.cjs', target], env)
+        run(['node', ROOT / 'tests/pane.cjs'], env)
+        run(['node', ROOT / 'tests/companion.cjs'], env)
+        run(['node', ROOT / 'tests/sidebar-menu.cjs'], env)
+        inbox_check = target / 'mods/tinkery-inbox/check-inbox.cjs'
+        shutil.copy2(upstream / 'mods/t3-inbox/check-inbox.cjs', inbox_check)
+        run(['node', inbox_check], env)
         settings = json.loads((target / 'settings.json').read_text())
         settings['appearance'] = 'dark'
         settings['theme'] = 'tinkery-dark'
         (target / 'settings.json').write_text(json.dumps(settings))
         run(cli + ['check'] + flags, env)
         assert json.loads((target / 'settings.json').read_text())['appearance'] == 'dark'
-    print('ok: isolated install, idempotence, eight Herdr mod checks, upstream tests and theme regression tests')
+    print(f'ok: isolated install, idempotence, {len(mods)} Herdr mod checks, upstream tests, '
+          'theme, pane, companion, sidebar-menu and personal Inbox regression tests')
 
 
 if __name__ == '__main__':

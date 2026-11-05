@@ -5,6 +5,11 @@
     "version": "0.1.11"
   },
   "type": "row",
+  "preview": "layouts/tinkery-t3.svg",
+  "divider": {
+    "width": 1,
+    "color": "border"
+  },
   "children": [
     {
       "id": "sidebar",
@@ -24,6 +29,7 @@
         {
           "id": "sidebar-lists",
           "type": "stack",
+          "active": "lists",
           "children": [
             {
               "id": "lists",
@@ -32,39 +38,38 @@
                 {
                   "id": "spaces",
                   "type": "block",
-                  "content": {
-                    "mod": "t3-spaces"
-                  },
                   "size": {
                     "weight": 1
                   },
-                  "min": 90
+                  "min": 90,
+                  "content": {
+                    "mod": "t3-spaces"
+                  }
                 },
                 {
                   "id": "agents",
                   "type": "block",
-                  "content": {
-                    "mod": "t3-agents"
-                  },
                   "size": {
                     "weight": 1
                   },
-                  "min": 90
+                  "min": 90,
+                  "content": {
+                    "mod": "tinkery-agent-list"
+                  }
                 }
               ]
             },
             {
-              "id": "focus",
+              "id": "inbox",
               "type": "block",
               "content": {
-                "mod": "t3-focus",
+                "mod": "tinkery-inbox",
                 "props": {
                   "newMenu": "t3-new-menu"
                 }
               }
             }
-          ],
-          "active": "lists"
+          ]
         },
         {
           "id": "sidebar-footer",
@@ -81,9 +86,9 @@
         }
       ],
       "size": {
-        "px": 268
+        "px": 256
       },
-      "min": 180,
+      "min": 208,
       "max": 480,
       "background": "chrome",
       "resizable": false
@@ -110,7 +115,7 @@
                 "mod": "tinkery-theme"
               },
               "size": {
-                "px": 40
+                "px": 120
               }
             }
           ],
@@ -125,94 +130,73 @@
           "type": "row",
           "children": [
             {
-              "id": "view",
-              "type": "stack",
-              "children": [
-                {
-                  "id": "main",
-                  "type": "block",
-                  "content": {
-                    "tab": "active",
-                    "pane": {
-                      "header": {
-                        "content": {
-                          "mod": "t3-pane"
-                        },
-                        "reveal": "always",
-                        "height": 28,
-                        "position": "top"
-                      },
-                      "background": "background",
-                      "border": {
-                        "width": 2,
-                        "color": "background"
-                      },
-                      "focus": {
-                        "width": 2,
-                        "color": "background"
-                      },
-                      "radius": 8,
-                      "gap": 8,
-                      "lone": true
-                    }
-                  }
-                },
-                {
-                  "id": "agent",
-                  "type": "block",
-                  "content": {
-                    "agent": "focused"
+              "id": "main",
+              "type": "block",
+              "content": {
+                "tab": "active",
+                "pane": {
+                  "header": {
+                    "content": {
+                      "mod": "tinkery-pane"
+                    },
+                    "reveal": "always",
+                    "height": 28,
+                    "position": "top"
                   },
                   "background": "background",
-                  "radius": 8
+                  "border": {
+                    "width": 1,
+                    "color": "border"
+                  },
+                  "focus": {
+                    "width": 1,
+                    "color": "accent"
+                  },
+                  "radius": 0,
+                  "gap": 4,
+                  "lone": true
                 }
-              ],
-              "active": "main"
+              }
             }
           ],
           "padding": [
-            2,
-            8
+            0,
+            2
           ],
-          "gap": 8
+          "gap": 4
         },
         {
           "id": "work-bottom-inset",
           "type": "row",
           "children": [],
           "size": {
-            "px": 6
+            "px": 0
           }
         },
         {
           "id": "status",
           "type": "block",
-          "content": {
-            "mod": "workspace-status"
-          },
+          "hidden": true,
           "size": {
             "px": 28
           },
-          "hidden": true
+          "content": {
+            "mod": "workspace-status"
+          }
         }
       ],
       "resizable": false
     }
   ],
   "background": "canvas",
+  "terminal_opacity": 0,
   "terminal_padding": [
-    8,
+    2,
     0
   ],
-  "terminal_opacity": 0,
-  "divider": {
-    "width": 1,
-    "color": "border"
-  },
   "titlebar": "none",
   "traffic_lights": [
     16,
     13
-  ],
-  "preview": "layouts/tinkery-t3.svg"
+  ]
 }

@@ -60,11 +60,13 @@
   },
   "layout:herdr-t3": {
     "cmd-shift-b": "t3-chrome.sidebar",
-    "cmd-shift-a": "t3-tabs.view"
+    "cmd-shift-s": "t3-inbox.settle"
   },
   "layout:tinkery-t3": {
     "cmd-shift-b": "t3-chrome.sidebar",
-    "cmd-shift-a": "t3-tabs.view"
+    "cmd-shift-s": "tinkery-inbox.settle",
+    "cmd-shift-r": "mod.open:changes",
+    "cmd-shift-t": "tinkery-pane.open-tinkery"
   },
   "terminal": {
     "cmd-c": "terminal.copy",
